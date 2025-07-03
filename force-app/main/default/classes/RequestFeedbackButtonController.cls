@@ -8,7 +8,7 @@
 public with sharing class RequestFeedbackButtonController {
     @AuraEnabled
     public static void createFeedbackRecord(Id complaintId){
-        SQX_Complaint__c complaint = [SELECT Id, CQ_Title__c, Name, Customer_Contact_Email__c 
+        SQX_Complaint__c complaint = [SELECT Id, CQ_Title__c, Name, Customer_Contact_Email__c, ConName__c‎ 
                                                 FROM SQX_Complaint__c 
                                                 WHERE Id = :complaintId WITH SECURITY_ENFORCED LIMIT 1];
         String email = complaint.Customer_Contact_Email__c;
