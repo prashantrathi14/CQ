@@ -20,18 +20,18 @@ public with sharing class RequestFeedbackButtonController {
             CQ_Status__c = 'Requested'
         );
         insert feedback;
-        sendFeedbackEmail(feedback.Id, complaint.Customer_Contact_Email__c);
+        sendFeedbackEmail(feedback.Id, complaint.Customer_Contact_Email__c,complaint.Name, complaint.ConName__c);
     }
 
     // Sending Feedback record link on email
-    private static void sendFeedbackEmail(Id feedbackId, String toEmail) {
+    private static void sendFeedbackEmail(Id feedbackId, String toEmail, String complaintName, String ConName) {
         String baseUrl = URL.getOrgDomainUrl().toExternalForm();
         String formLink = baseUrl + '/lightning/r/SQX_Complaint_Feedback__c/' + feedbackId + '/view';
 
         Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
         email.setToAddresses(new String[] { toEmail });
-        email.setSubject('We’d love your feedback!');
-        email.setPlainTextBody('Please share your thoughts by clicking the link below:\n' + formLink +'\n\n Regards\n System Admin');
+        email.setSubject('Please fill your feedback for Compliant : '+complaintName);
+        email.setPlainTextBody('Hi '+ ConName+'\n\nPlease share your thoughts by clicking the link below:\n' + formLink +'\n\n Regards\n System Admin');
         Messaging.sendEmail(new Messaging.SingleEmailMessage[] { email });
     }
 }
