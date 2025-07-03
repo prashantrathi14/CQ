@@ -1,0 +1,9 @@
+<aura:component implements="force:lightningQuickAction,force:hasRecordId" controller="RequestFeedbackButtonController" access="global">
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <lightning:spinner if:true="{!v.isLoading}" alternativeText="Processing..." />
+	<aura:handler name="init" value="{!this}" action="{!c.handleRequest}" />
+    <!--<lightning:button variant="brand" label="Request Feedback" onclick="{!c.handleRequest}" class="slds-m-around_medium"/>-->
+
+</aura:component>
